@@ -1,24 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>VentanaPrincipal</class>
- <widget class="QMainWindow" name="VentanaPrincipal" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="VentanaPrincipal">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>870</width>
+    <height>451</height>
    </rect>
   </property>
-  <property name="windowTitle" >
-   <string>VentanaPrincipal</string>
+  <property name="windowTitle">
+   <string>Zona Roja Universidad de Oriente</string>
   </property>
-  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="barraHerramientas1">
+      <item>
+       <layout class="QVBoxLayout" name="segmentacionBloque">
+        <item>
+         <widget class="QPushButton" name="bloqueButton">
+          <property name="text">
+           <string>Bloque</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="bloqueLabel">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="segmentacionCubiculo">
+        <item>
+         <widget class="QPushButton" name="cubiculoButton">
+          <property name="text">
+           <string>Cubiculo</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="cubiculoLabel">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="segmentacionResultado">
+        <item>
+         <widget class="QPushButton" name="resultadoButton">
+          <property name="text">
+           <string>Resultado</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="resultadoLabel">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="segmentacionFechaPCR">
+        <item>
+         <widget class="QPushButton" name="fechaPCRButton">
+          <property name="text">
+           <string>Fecha PCR</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="fechaPCRLabel">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTableWidget" name="tabla">
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ContiguousSelection</enum>
+      </property>
+      <property name="rowCount">
+       <number>500</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>Nombres y Apellidos</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Bloque</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cubiculo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>HTA</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>DM</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>AB</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>IL</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Direccion</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Edad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Raza</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Sexo</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>CI</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Municipio</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Provincia</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Area de Salud</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Contacto de:</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha de Ingreso</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha de ultimo contacto</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha 1ER PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Resultado 1ER PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha 2DO PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Resultado 2DO PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha 3ER PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Resultado 3ER PCR</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="barraHerramientas2"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>870</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuArchivo">
+    <property name="title">
+     <string>Archivo</string>
+    </property>
+    <addaction name="actionImprimir"/>
+   </widget>
+   <addaction name="menuArchivo"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>BottomToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionPacientes"/>
+   <addaction name="separator"/>
+   <addaction name="actionParte"/>
+   <addaction name="separator"/>
+   <addaction name="actionEgresos"/>
+   <addaction name="separator"/>
+   <addaction name="actionRemisiones"/>
+   <addaction name="separator"/>
+   <addaction name="actionDisponibilidad"/>
+   <addaction name="separator"/>
+   <addaction name="actionPlanificacion_PCR"/>
+   <addaction name="separator"/>
+   <addaction name="actionResultados_PCR"/>
+  </widget>
+  <action name="actionPacientes">
+   <property name="text">
+    <string>Pacientes</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Pacientes del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionParte">
+   <property name="text">
+    <string>Parte</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Situacion del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionEgresos">
+   <property name="text">
+    <string>Egresos</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Egresos del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
+  </action>
+  <action name="actionRemisiones">
+   <property name="text">
+    <string>Remisiones</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Remisiones del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionDisponibilidad">
+   <property name="text">
+    <string>Disponibilidad</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Disponibilidad del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionPlanificacion_PCR">
+   <property name="text">
+    <string>Planificacion PCR</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar PCR Planificados del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionResultados_PCR">
+   <property name="text">
+    <string>Resultados PCR</string>
+   </property>
+   <property name="toolTip">
+    <string>Visualizar Resultados de PCR del Centro</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+7</string>
+   </property>
+  </action>
+  <action name="actionImprimir">
+   <property name="text">
+    <string>Imprimir</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources/>
  <connections/>
 </ui>
