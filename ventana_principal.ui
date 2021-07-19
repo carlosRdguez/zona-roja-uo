@@ -16,92 +16,39 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="barraHerramientas1">
-      <item>
-       <layout class="QVBoxLayout" name="segmentacionBloque">
-        <item>
-         <widget class="QPushButton" name="bloqueButton">
-          <property name="text">
-           <string>Bloque</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="bloqueLabel">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="segmentacionCubiculo">
-        <item>
-         <widget class="QPushButton" name="cubiculoButton">
-          <property name="text">
-           <string>Cubiculo</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="cubiculoLabel">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="segmentacionResultado">
-        <item>
-         <widget class="QPushButton" name="resultadoButton">
-          <property name="text">
-           <string>Resultado</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="resultadoLabel">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="segmentacionFechaPCR">
-        <item>
-         <widget class="QPushButton" name="fechaPCRButton">
-          <property name="text">
-           <string>Fecha PCR</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="fechaPCRLabel">
-          <property name="text">
-           <string/>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <layout class="QHBoxLayout" name="barraHerramientas1"/>
     </item>
     <item>
      <widget class="QTableWidget" name="tabla">
-      <property name="alternatingRowColors">
-       <bool>true</bool>
+      <property name="cursor" stdset="0">
+       <cursorShape>CrossCursor</cursorShape>
       </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ContiguousSelection</enum>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:&quot;lightgray&quot;;</string>
+      </property>
+      <property name="horizontalScrollMode">
+       <enum>QAbstractItemView::ScrollPerPixel</enum>
       </property>
       <property name="rowCount">
-       <number>500</number>
+       <number>501</number>
       </property>
+      <property name="columnCount">
+       <number>25</number>
+      </property>
+      <attribute name="horizontalHeaderHighlightSections">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <row>
+       <property name="text">
+        <string>Filtros</string>
+       </property>
+      </row>
       <row/>
       <row/>
       <row/>
@@ -674,17 +621,17 @@
       </column>
       <column>
        <property name="text">
-        <string>Area de Salud</string>
+        <string>Area de salud</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Contacto de:</string>
+        <string>Contacto de</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Fecha de Ingreso</string>
+        <string>Fecha de ingreso</string>
        </property>
       </column>
       <column>
@@ -720,6 +667,11 @@
       <column>
        <property name="text">
         <string>Resultado 3ER PCR</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>rowid</string>
        </property>
       </column>
      </widget>

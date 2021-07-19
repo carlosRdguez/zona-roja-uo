@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,10 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        ventana_principal.cpp
+        ventana_principal.cpp \
+    pacientes.cpp
 
 HEADERS += \
-        ventana_principal.h
+        ventana_principal.h \
+    pacientes.h
 
 FORMS += \
         ventana_principal.ui
+
+RC_ICONS += zonaroja.ico
