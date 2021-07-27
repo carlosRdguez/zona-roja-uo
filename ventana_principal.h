@@ -6,23 +6,47 @@
 #include <QPrintDialog>
 #include <QTextDocument>
 #include <QPrinter>
+#include <QDropEvent>
+#include <QDragEnterEvent>
+#include <QMimeData>
 
 #include "pacientes.h"
+#include "resultadospcr.h"
+#include "actualizador.h"
+#include "databasemanager.h"
 
 namespace Ui {
 class VentanaPrincipal;
 }
 
+/**
+ * @brief Clase VentanaPrincipal
+ *
+ * Clase de interfaz que controla la interfaz del sistema
+ */
+
 class VentanaPrincipal : public QMainWindow
 {
     Q_OBJECT
-
+protected:
+    void dragEnterEvent(QDragEnterEvent *e);
+    void dropEvent(QDropEvent *e);
 public:
     explicit VentanaPrincipal(QWidget *parent = 0);
     ~VentanaPrincipal();
     // elimina todos los controladores activos
     void eliminarControladoresActivos();
+    // muestra placa actual del dia
+    void mostrarUltimaPlaca();
 private slots:
+    // este slot se activa cuando se estan actualizando valores en la base de datos y bloquea la app
+    // para evitar errores; se espera que termine la actualizacion y se devuelveel control al usuario
+    void nuevosResultadosDelCentro();
+    // dispara cuando se terminan de actualizar las bases de datos posteriormente de arribar nuevos resultados de PCR al sistema
+    void actualizacionFinalizada();
+    // este slot se activa al detectar un correo con resultados nuevo, se deberia imposibilitar al usuario cerrar la app
+    void descargaIniciada();
+
     void on_actionPacientes_triggered();
 
     void on_actionParte_triggered();
@@ -37,12 +61,37 @@ private slots:
 
     void on_actionResultados_PCR_triggered();
 
-    void on_actionImprimir_triggered();
+    void on_actionSeleccion_triggered();
+
+    void on_actionPantalla_completa_triggered();
+
+    void on_actionSegmentacion_de_datos_triggered();
+
+    void on_actionBarra_de_estado_triggered();
+
+    void on_actionPreferencias_triggered();
+
+    void on_actionCerrar_triggered();
+
+    void on_actionAyuda_triggered();
+
+    void on_actionContacto_triggered();
+
+    void on_actionAcerca_de_triggered();
+
+
+    void on_actionDeshacer_triggered();
 
 private:
 
     Ui::VentanaPrincipal *ui;
+
+    Actualizador* actualizador;
+    DataBaseManager::Controlador controladorActivo;
     Pacientes* controladorPacientes = nullptr;
+    ResultadosPCR* controladorResultadosPCR = nullptr;
+
+    QMessageBox* blockingMsg;
 
 };
 

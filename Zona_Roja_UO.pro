@@ -26,11 +26,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         ventana_principal.cpp \
-    pacientes.cpp
+    pacientes.cpp \
+    databasemanager.cpp \
+    xlsfile.cpp \
+    resultadospcr.cpp \
+    actualizador.cpp
 
 HEADERS += \
         ventana_principal.h \
-    pacientes.h
+    pacientes.h \
+    databasemanager.h \
+    xlsfile.h \
+    resultadospcr.h \
+    actualizador.h
 
 FORMS += \
         ventana_principal.ui

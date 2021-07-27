@@ -1,5 +1,5 @@
-#ifndef PACIENTES_H
-#define PACIENTES_H
+#ifndef RESULTADOSPCR_H
+#define RESULTADOSPCR_H
 
 #include <QApplication>
 #include <QClipboard>
@@ -9,7 +9,6 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QGroupBox>
-#include <QDate>
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -39,6 +38,7 @@
 #include <QModelIndex>
 #include <QModelIndexList>
 #include <QItemSelectionModel>
+#include <QPair>
 
 
 #include <databasemanager.h>
@@ -52,21 +52,20 @@ typedef QList<QStringList> Tabla;
 #define GRIS "#87868a"
 #define BLANCO "#ffffff"
 
-
 /**
- * @brief Clase Pacientes
+ * @brief Clase ResultadosPCR
  *
  * Controlador del comportamiento de la tabla que muestra la informacion de
- * las bases de datos Pacientes.db, Egresos.db y Remisiones.db
+ * las bases de datos ResultadosPCR.db
  */
 
-class Pacientes : public QObject
+class ResultadosPCR : public QObject
 {
     Q_OBJECT
 protected :
     bool eventFilter(QObject *watched, QEvent *event);
 public:
-    explicit Pacientes(QObject *parent = nullptr, QTableWidget* view = nullptr, DataBaseManager::Controlador cont = DataBaseManager::DBPacientes);
+    explicit ResultadosPCR(QObject *parent = nullptr, QTableWidget* view = nullptr, DataBaseManager::Controlador cont = DataBaseManager::DBResultadosPCR);
     // crea la base de datos y sus tablas si no estan creadas
     bool crearBaseDeDatos();
     // carga la tabla con el comando sql deseado
@@ -75,8 +74,6 @@ public:
     void darColor(int row = -1, int column = -1);
     // retorna el nombre de la fila en base de datos correspondiente a index
     QString getRow(int index);
-    // retorna todos los campos de la fila
-    QStringList valoresFila(int fila);
     // retorna la cantidad de campos no vacios en una fila (esta funcion se emplea para determinar si se esta eliminando
     // el ultimo campo con valores de una fila; con ello se procede a la eliminacion del registro de la base de datos)
     int getNotNull(int row);
@@ -84,15 +81,10 @@ public:
     void filtrar();
     // marca completamente las filas de una seleccion de la tabla
     void marcarFilas();
-    // deshacer cambio en base de datos
-    void deshacer();
-    ~Pacientes();
+    ~ResultadosPCR();
 signals:
 
 private slots:
-    void on_tabla_cellChanged(int row, int column);
-
-    void on_tabla_cellClicked(int row, int column);
 
     // slots para desplegar cuadro de seleccion de segmentacion de datos
     void on_bloqueButton_clicked();
@@ -121,13 +113,11 @@ private slots:
 
     void limpiarSegmentacionFechaPCR();
     // slot de los action del context menu
-    void actionMarcar();
 
     void actionAgregarListaRemision();
 
     void actionAgregarListaEgresos();
 
-    void actionEliminar();
     // slot para filtros interactivos
     void filtroInteractivo(QString text);
 private:
@@ -145,16 +135,12 @@ private:
     QPushButton* limpiarBloque, *limpiarCubiculo, *limpiarResultado, *limpiarFechaPCR;
     // indicadores
     QString **criterios; // criterios para filtrar, puede ser un array de 24 o 25 elementos
-    QString *textoSegmentacionResultado = nullptr;
-    QString *textoSegmentacionFechaPCR = nullptr;
     QMenu* menu;
     int filtroActivo = 0;
     int scrollBarValue = 0;
     int numRows = 0;
     QString currentText = "";
-    QStringList verticalHeaderLabels;
-    bool desactivarRenderizado = false;
-    int lastRowidBeforeCommit;
+    QList<QStringList> resultados;
 };
 
-#endif // PACIENTES_H
+#endif // RESULTADOSPCR_H

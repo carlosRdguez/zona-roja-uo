@@ -10,13 +10,26 @@
     <height>451</height>
    </rect>
   </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
+  </property>
   <property name="windowTitle">
    <string>Zona Roja Universidad de Oriente</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QToolButton:checked {font: &quot;arial-bold&quot; }
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <layout class="QHBoxLayout" name="barraHerramientas1"/>
+     <widget class="QWidget" name="barraHerramientas1Widget" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="barraHerramientas1"/>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <widget class="QTableWidget" name="tabla">
@@ -27,10 +40,19 @@
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color:&quot;lightgray&quot;;</string>
+       <string notr="true">
+QTableWidget {
+background-color:&quot;lightgray&quot;;
+}</string>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::AnyKeyPressed|QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed|QAbstractItemView::SelectedClicked</set>
       </property>
       <property name="horizontalScrollMode">
        <enum>QAbstractItemView::ScrollPerPixel</enum>
+      </property>
+      <property name="gridStyle">
+       <enum>Qt::SolidLine</enum>
       </property>
       <property name="rowCount">
        <number>501</number>
@@ -39,9 +61,6 @@
        <number>25</number>
       </property>
       <attribute name="horizontalHeaderHighlightSections">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
        <bool>true</bool>
       </attribute>
       <row>
@@ -694,9 +713,71 @@
     <property name="title">
      <string>Archivo</string>
     </property>
-    <addaction name="actionImprimir"/>
+    <widget class="QMenu" name="menuImprimir">
+     <property name="title">
+      <string>Imprimir</string>
+     </property>
+     <addaction name="actionSeleccion"/>
+     <addaction name="separator"/>
+     <addaction name="actionBase_de_datos_de_Pacientes_2"/>
+     <addaction name="actionBase_de_datos_de_Egresos"/>
+     <addaction name="actionInforme_de_Remisiones"/>
+     <addaction name="actionInforme_de_Envio_de_PCR"/>
+     <addaction name="actionInforme_de_Resultados_de_PCR"/>
+    </widget>
+    <widget class="QMenu" name="menuGuardar">
+     <property name="title">
+      <string>Guardar</string>
+     </property>
+     <addaction name="actionBase_de_datos_de_Pacientes"/>
+     <addaction name="action_Base_de_datos_de_Egresos"/>
+     <addaction name="actionBase_de_datos_de_Remisiones"/>
+     <addaction name="actionBase_de_datos_de_Envio_de_PCR"/>
+     <addaction name="actionBase_de_datos_de_Resultados_de_PCR"/>
+     <addaction name="separator"/>
+     <addaction name="actionGuardar_todo"/>
+    </widget>
+    <widget class="QMenu" name="menuExportar">
+     <property name="title">
+      <string>Exportar</string>
+     </property>
+     <addaction name="actionDocumento_Excel"/>
+     <addaction name="actionFormato_texto"/>
+     <addaction name="actionComo_CSV"/>
+    </widget>
+    <addaction name="menuGuardar"/>
+    <addaction name="actionDeshacer"/>
+    <addaction name="separator"/>
+    <addaction name="menuExportar"/>
+    <addaction name="menuImprimir"/>
+    <addaction name="separator"/>
+    <addaction name="actionCerrar"/>
+   </widget>
+   <widget class="QMenu" name="menuEditar">
+    <property name="title">
+     <string>Vista</string>
+    </property>
+    <addaction name="actionPantalla_completa"/>
+    <addaction name="actionSegmentacion_de_datos"/>
+    <addaction name="actionBarra_de_estado"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferencias"/>
+   </widget>
+   <widget class="QMenu" name="menuAyuda">
+    <property name="title">
+     <string>Ayuda</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionAyuda"/>
+    <addaction name="separator"/>
+    <addaction name="actionContacto"/>
+    <addaction name="actionInforme_de_error"/>
+    <addaction name="separator"/>
+    <addaction name="actionAcerca_de"/>
    </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuEditar"/>
+   <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
@@ -800,9 +881,153 @@
     <string>Ctrl+7</string>
    </property>
   </action>
-  <action name="actionImprimir">
+  <action name="actionContacto">
    <property name="text">
-    <string>Imprimir</string>
+    <string>Contacto del programador</string>
+   </property>
+  </action>
+  <action name="actionAcerca_de">
+   <property name="text">
+    <string>Acerca de</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Pacientes">
+   <property name="text">
+    <string>Base de datos de Pacientes</string>
+   </property>
+  </action>
+  <action name="action_Base_de_datos_de_Egresos">
+   <property name="text">
+    <string>Base de datos de Egresos</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Remisiones">
+   <property name="text">
+    <string>Base de datos de Remisiones</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Envio_de_PCR">
+   <property name="text">
+    <string>Base de datos de Envio de PCR</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Resultados_de_PCR">
+   <property name="text">
+    <string>Base de datos de Resultados de PCR</string>
+   </property>
+  </action>
+  <action name="actionGuardar_todo">
+   <property name="text">
+    <string>Guardar todo</string>
+   </property>
+  </action>
+  <action name="actionSeleccion">
+   <property name="text">
+    <string>Seleccion</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Pacientes_2">
+   <property name="text">
+    <string>Informe de Pacientes diario</string>
+   </property>
+  </action>
+  <action name="actionBase_de_datos_de_Egresos">
+   <property name="text">
+    <string>Informe de Egresos diario</string>
+   </property>
+  </action>
+  <action name="actionInforme_de_Remisiones">
+   <property name="text">
+    <string>Informe de Remisiones diario</string>
+   </property>
+  </action>
+  <action name="actionInforme_de_Envio_de_PCR">
+   <property name="text">
+    <string>Informe de Envio de PCR</string>
+   </property>
+  </action>
+  <action name="actionInforme_de_Resultados_de_PCR">
+   <property name="text">
+    <string>Informe de Resultados de PCR</string>
+   </property>
+  </action>
+  <action name="actionCerrar">
+   <property name="text">
+    <string>Cerrar</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionFormato_texto">
+   <property name="text">
+    <string>Texto Plano</string>
+   </property>
+  </action>
+  <action name="actionComo_CSV">
+   <property name="text">
+    <string>CSV</string>
+   </property>
+  </action>
+  <action name="actionDocumento_Excel">
+   <property name="text">
+    <string>Documento Excel</string>
+   </property>
+  </action>
+  <action name="actionSegmentacion_de_datos">
+   <property name="text">
+    <string>Segmentacion de datos</string>
+   </property>
+   <property name="shortcut">
+    <string>F10</string>
+   </property>
+  </action>
+  <action name="actionBarra_de_estado">
+   <property name="text">
+    <string>Barra de estado</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="actionPreferencias">
+   <property name="text">
+    <string>Preferencias</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
+   </property>
+  </action>
+  <action name="actionInforme_de_error">
+   <property name="text">
+    <string>Informe de error</string>
+   </property>
+  </action>
+  <action name="actionPantalla_completa">
+   <property name="text">
+    <string>Pantalla completa</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
+   </property>
+  </action>
+  <action name="actionAyuda">
+   <property name="text">
+    <string>Ayuda</string>
+   </property>
+   <property name="toolTip">
+    <string>Ayuda del sistema</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionDeshacer">
+   <property name="text">
+    <string>Deshacer</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
    </property>
   </action>
  </widget>
