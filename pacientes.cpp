@@ -136,6 +136,10 @@ bool Pacientes::eventFilter(QObject *watched, QEvent *event) {
             else if(keyEvent->text() == "\u0004") {
                 dbMove = new DataBaseManager(this, DataBaseManager::DBRemisiones);
             }
+            else {
+                QMessageBox::critical(parentWidget, "Error al abrir base de datos.", "No se encontro la base de datos para mover al paciente.");
+                return true;
+            }
             int controlador = dbMove->getControlador();
             for(auto it : filasSeleccionadas) {
                 // preparando instruccion sql

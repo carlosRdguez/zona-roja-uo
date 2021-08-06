@@ -8,9 +8,10 @@
 #include <QTime>
 #include <QDebug>
 #include <QMessageBox>
+#include <QThread>
+#include <QString>
 
-
-#include "xlsfile.h"
+#include "excelmanager.h"
 #include "databasemanager.h"
 
 typedef QList<QStringList> Tabla;
@@ -35,7 +36,7 @@ class Actualizador : public QObject
 public:
     // modos en que puede funcionar el actualizador
     enum Modo{ActualizacionManual, ActualizacionAutomatica};
-    explicit Actualizador(QObject *parent = nullptr, Modo _modo = ActualizacionManual);
+    explicit Actualizador(QObject* parent = nullptr, Modo _modo = ActualizacionManual);
     // cambia de modo actualizacion automatica o manual
     void asignarModo(Modo modo);
     // obtiene el modo actual
@@ -44,11 +45,14 @@ public:
     void leerNuevaEntrada(QString ruta);
     // actualiza las bases de datos
     bool actualizarBasesDeDatos(Tabla &resultados);
+    virtual ~Actualizador();
 signals:
     void descargaIniciada(); // se emite cada vez que hay un correo descargandose
     void nuevosResultadosDelCentro(); // se emite cada vez que hay resultados del centro
     void actualizacionFinalizada();
     void sinConexion(); // se emite cada vez que no se pueda conectar a la red
+
+    void leer(QString ruta);
 public slots:
     // obtiene los documentos adjuntos del correo y los descarga
     void obtenerAdjuntosCorreosEntrantes();

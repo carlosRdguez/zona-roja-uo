@@ -90,7 +90,6 @@ private:
     DataBaseManager::Controlador controladorActivo;
     Pacientes* controladorPacientes = nullptr;
     ResultadosPCR* controladorResultadosPCR = nullptr;
-
     QMessageBox* blockingMsg;
 
 };

@@ -183,10 +183,10 @@ void ResultadosPCR::darColor(int row, int column) {
         QColor* color = new QColor(GRIS);
         if(tabla->item(row, resultado)) {
             QString res = tabla->item(row, resultado)->text();
-            if(res == "POS COVID-19") {
+            if(res == "POS COVID-19" || res == "POS-COVID 19") {
                 color = new QColor(ROJO);
             }
-            else if(res == "NEG COVID-19") {
+            else if(res == "NEG COVID-19" || res == "NEG-COVID 19") {
                 color = new QColor(VERDE);
             }
             else if(res == "REPETIR MUESTRA") {

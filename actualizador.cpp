@@ -1,6 +1,6 @@
 #include "actualizador.h"
 
-Actualizador::Actualizador(QObject *parent, Modo _modo) : QObject(parent) {
+Actualizador::Actualizador(QObject* parent, Modo _modo) : QObject(parent){
     asignarModo(_modo);
 }
 
@@ -36,9 +36,10 @@ void Actualizador::obtenerAdjuntosCorreosEntrantes() {
 
 void Actualizador::leerNuevaEntrada(QString ruta) {
     if(entradaValida(ruta)) {
-        // emitiendo sennal de nueva entrada, para saber la ultima placa del dia
-        Tabla datos = XLSFile::obtenerDatos(ruta);
-        actualizarBasesDeDatos(datos);
+        // obteniendo datos de archivo agregado o descargado (en otro hilo para no bloquear la app)
+        ExcelManager *manager = new ExcelManager(this);
+        Tabla resultados = manager->leerDocumento(ruta);
+        actualizarBasesDeDatos(resultados);
     }
 }
 
@@ -46,7 +47,7 @@ bool Actualizador::actualizarBasesDeDatos(Tabla &resultados) {
     bool resultadosDelCentro = false;
     // determinando si llegaron resultados del centro
     for(int i = 1; i < resultados.size(); i++) {
-        if(resultados.at(i).at(16) == "Universidad de Oriente") {
+        if(resultados.at(i).at(16).toUpper() == "UNIVERSIDAD DE ORIENTE") {
             resultadosDelCentro = true;
             break;
         }
@@ -58,26 +59,33 @@ bool Actualizador::actualizarBasesDeDatos(Tabla &resultados) {
         QList<int> resultadosNoLocalizados;
         // obteniendo ubicacion de pacientes en base de datos se pacientes
         for(int i = 1; i < resultados.size(); i++) {
-            DataBaseManager *dbm = new DataBaseManager(this, DataBaseManager::DBPacientes);
-            Tabla consulta = dbm->consultaSQL("select bloque, cubiculo, rowid from Pacientes where nombre=\'" + resultados.at(i).at(3) + "\' and ci='" + resultados.at(i).at(6) + "\'");
-            resultados[i].insert(4, QString());
-            resultados[i].insert(5, QString());
-            if(consulta.size() == 0) {
-                resultadosNoLocalizados << i;
+            if(resultados.at(i).at(16).toUpper() == "UNIVERSIDAD DE ORIENTE") {
+                DataBaseManager *dbm = new DataBaseManager(this, DataBaseManager::DBPacientes);
+                Tabla consulta = dbm->consultaSQL("select bloque, cubiculo, rowid from Pacientes where nombre=\'" + resultados.at(i).at(3) + "\' and ci='" + resultados.at(i).at(6) + "\'");
+                resultados[i].insert(4, QString());
+                resultados[i].insert(5, QString());
+                if(consulta.size() == 0) {
+                    resultadosNoLocalizados << i;
+                }
+                else {
+                    // completando informacion que falta (bloque, cubiculo)
+                    resultados[i][4] = consulta.at(0).at(0);
+                    resultados[i][5] = consulta.at(0).at(1);
+                    QString marca = resultados.at(i).at(19);
+                    if(marca == "POS COVID-19" || marca == "POS-COVID 19")
+                        marca = "POSITIVO COVID-19";
+                    else if(marca == "NEG COVID-19" || marca == "NEG-COVID 19")
+                        marca = "NEGATIVO COVID-19";
+                    if(!dbm->marcar(consulta.at(0).at(2), marca)){
+                        QMessageBox::critical(dynamic_cast<QWidget*>(parent()), "Error en la actualizacion", "No se pudieron agregar los datos correctamente a la base de datos. [1]");
+                        emit actualizacionFinalizada();
+                        return false;
+                    }
+                }
             }
             else {
-                // completando informacion que falta (bloque, cubiculo)
-                resultados[i][4] = consulta.at(0).at(0);
-                resultados[i][5] = consulta.at(0).at(1);
-            }
-            QString marca = resultados.at(i).at(19);
-            if(marca == "POS COVID-19")
-                marca = "POSITIVO COVID-19";
-            else if(marca == "NEG COVID-19")
-                marca = "NEGATIVO COVID-19";
-            if(!dbm->marcar(consulta.at(0).at(2), marca)){
-                emit actualizacionFinalizada();
-                return false;
+                resultados[i].insert(4, QString());
+                resultados[i].insert(5, QString());
             }
         }
         // hubieron pacientes no localizados (puede deberse a que se cambio el nombre o ci; tambien puede deberse a que
@@ -96,16 +104,23 @@ bool Actualizador::actualizarBasesDeDatos(Tabla &resultados) {
         }
     }
     // actualizando base de datos de pcr
+    DataBaseManager *dbm = new DataBaseManager(this, DataBaseManager::DBResultadosPCR);
+    dbm->beginTransaction();
     for(int i = 1; i < resultados.size(); i++) {
-        DataBaseManager *dbm = new DataBaseManager(this, DataBaseManager::DBResultadosPCR);
         QString insertarFila = convertirSQL(resultados.at(i));
-        if(!dbm->ejecutarSQL("insert into ResultadosPCR values(" + insertarFila + ")")) {
+        if(!dbm->ejecutarSQL("insert into ResultadosPCR values(" + insertarFila + ");")) {
+            QMessageBox::critical(dynamic_cast<QWidget*>(parent()), "Error en la actualizacion", "No se pudieron agregar los datos correctamente a la base de datos. [2]");
             emit actualizacionFinalizada();
             return false;
         }
     }
+    dbm->endTransaction();
     emit actualizacionFinalizada();
     return true;
+}
+
+Actualizador::~Actualizador() {
+
 }
 
 bool Actualizador::entradaValida(QString ruta) {

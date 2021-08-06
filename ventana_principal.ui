@@ -54,6 +54,9 @@ background-color:&quot;lightgray&quot;;
       <property name="gridStyle">
        <enum>Qt::SolidLine</enum>
       </property>
+      <property name="sortingEnabled">
+       <bool>false</bool>
+      </property>
       <property name="rowCount">
        <number>501</number>
       </property>

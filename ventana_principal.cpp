@@ -78,6 +78,7 @@ void VentanaPrincipal::mostrarUltimaPlaca() {
 }
 
 void VentanaPrincipal::nuevosResultadosDelCentro() {
+    // MENSAJE QUE SE MUESTRA CUANDO SE ESTA ACTUALIZANDO LAS BASES DE DATOS
     blockingMsg = new QMessageBox(this);
     blockingMsg->setWindowTitle("Actualizacion en curso");
     blockingMsg->setText("<h2>Se han detectado nuevos resultados del centro</h2>"
@@ -88,9 +89,9 @@ void VentanaPrincipal::nuevosResultadosDelCentro() {
 }
 
 void VentanaPrincipal::actualizacionFinalizada() {
-    blockingMsg->close();
+    blockingMsg->hide();
     delete blockingMsg;
-
+    on_actionResultados_PCR_triggered();
 }
 
 void VentanaPrincipal::descargaIniciada() {

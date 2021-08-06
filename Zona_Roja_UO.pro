@@ -22,23 +22,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+QXLSX_PARENTPATH=$$PWD/QXlsx/
+QXLSX_HEADERPATH=$$PWD/QXlsx/header/
+QXLSX_SOURCEPATH=$$PWD/QXlsx/source/
+include($$PWD/QXlsx/QXlsx.pri)
+
 
 SOURCES += \
         main.cpp \
         ventana_principal.cpp \
     pacientes.cpp \
     databasemanager.cpp \
-    xlsfile.cpp \
     resultadospcr.cpp \
-    actualizador.cpp
+    actualizador.cpp \
+    excelmanager.cpp
 
 HEADERS += \
         ventana_principal.h \
     pacientes.h \
     databasemanager.h \
-    xlsfile.h \
     resultadospcr.h \
-    actualizador.h
+    actualizador.h \
+    excelmanager.h
 
 FORMS += \
         ventana_principal.ui
