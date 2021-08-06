@@ -101,6 +101,7 @@ ResultadosPCR::ResultadosPCR(QObject *parent, QTableWidget* view, DataBaseManage
                 << "Numero Placa"
                 << "Fecha de Resultado";
     tabla->setHorizontalHeaderLabels(encabezados);
+    tabla->setRowCount(501);
     // DESHABILITANDO LA EDICION DE LOS CAMPOS DE LA TABLA
     tabla->setEditTriggers(QAbstractItemView::NoEditTriggers);
     // CARGAR TABLA PACIENTES DEL CENTRO
@@ -114,6 +115,21 @@ ResultadosPCR::ResultadosPCR(QObject *parent, QTableWidget* view, DataBaseManage
     crearEncabezadoFiltrosInteractivos();
     filtrar();
     tabla->resizeColumnsToContents();
+    // tamanno de las columnas (por defecto)
+    QList<int> columnWidth = QList<int>()
+            << 130
+            << 80
+            << 160
+            << 240
+            << 80
+            << 90
+            << 80
+            << 80
+            << 110
+            << 240;
+    for(int i = 0; i < columnWidth.size(); i++) {
+        tabla->setColumnWidth(i, columnWidth.at(i));
+    }
     // encabezado de filtros interactivos
     // preparando vertical header
     QStringList verticalHeaderLabels;
@@ -159,7 +175,6 @@ void ResultadosPCR::cargarTabla(QString sql) {
         for(int j = 0; j < resultadoConsulta.at(i).size(); j++) {
             // adquiriendo item y asignandole algunos estilos
             QTableWidgetItem* item = new QTableWidgetItem(resultadoConsulta.at(i).at(j));
-            item->setTextColor(QColor(BLANCO));
             tabla->setItem(i + 1, j, item);
         }
     }
@@ -184,13 +199,13 @@ void ResultadosPCR::darColor(int row, int column) {
         if(tabla->item(row, resultado)) {
             QString res = tabla->item(row, resultado)->text();
             if(res == "POS COVID-19" || res == "POS-COVID 19") {
-                color = new QColor(ROJO);
+                color = new ROJO;
             }
             else if(res == "NEG COVID-19" || res == "NEG-COVID 19") {
-                color = new QColor(VERDE);
+                color = new VERDE;
             }
             else if(res == "REPETIR MUESTRA") {
-                color = new QColor(AZUL);
+                color = new AZUL;
             }
         }
         for(int i=0; i<tabla->columnCount()-1; i++) {
@@ -201,7 +216,6 @@ void ResultadosPCR::darColor(int row, int column) {
                 emptyItem->setBackgroundColor(*color);
                 tabla->setItem(row, i, emptyItem);
             }
-            tabla->item(row, i)->setTextColor(QColor(BLANCO));
         }
     }
 }
@@ -310,6 +324,14 @@ ResultadosPCR::~ResultadosPCR() {
         delete frameFechaPCR;
     if(frameResultado)
         delete frameResultado;
+    delete indicadorFiltroBloque,
+    delete indicadorFiltroCubiculo,
+    delete indicadorFiltroResultado,
+    delete indicadorFiltroFechaPCR;
+    delete bloquelayOut,
+    delete cubiculolayOut,
+    delete resultadolayOut,
+    delete fechaPCRlayOut;
 }
 
 
@@ -346,8 +368,13 @@ void ResultadosPCR::on_bloqueButton_clicked() {
 
         frameBloque->setLayout(container);
 
-        frameBloque->setGeometry(bloqueButton->x(), bloqueButton->y() + 50, 180, filas*65);
-        frameBloque->setStyleSheet("background-color : #e2e2e2;");
+        frameBloque->setGeometry(bloqueButton->x()+20, bloqueButton->y() + 63, bloqueButton->width()-20, filas*50);
+        frameBloque->setStyleSheet("background-color : #f5f5f5;");
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
+        shadowEffect->setBlurRadius(5);
+        shadowEffect->setColor(QColor(145, 145, 145, 80));
+        shadowEffect->setOffset(3, 3);
+        frameBloque->setGraphicsEffect(shadowEffect);
         frameBloque->show();
     }
     else {
@@ -388,9 +415,14 @@ void ResultadosPCR::on_cubiculoButton_clicked() {
 
         frameCubiculo->setLayout(container);
 
-        frameCubiculo->setGeometry(cubiculoButton->x(), cubiculoButton->y() + 50, 180, filas*65);
-        frameCubiculo->setStyleSheet("background-color : #e2e2e2;");
+        frameCubiculo->setGeometry(cubiculoButton->x()+20, cubiculoButton->y() + 63, cubiculoButton->width()-20, filas*50);
+        frameCubiculo->setStyleSheet("background-color : #f5f5f5;");
         frameCubiculo->show();
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
+        shadowEffect->setBlurRadius(5);
+        shadowEffect->setColor(QColor(145, 145, 145, 80));
+        shadowEffect->setOffset(3, 3);
+        frameCubiculo->setGraphicsEffect(shadowEffect);
     }
     else {
         frameCubiculo->hide();
@@ -425,9 +457,14 @@ void ResultadosPCR::on_resultadoButton_clicked() {
 
         frameResultado->setLayout(container);
 
-        frameResultado->setGeometry(resultadoButton->x(),resultadoButton->y() + 50, 180, 200);
-        frameResultado->setStyleSheet("background-color : #e2e2e2;");
+        frameResultado->setGeometry(resultadoButton->x()+20, resultadoButton->y() + 63, resultadoButton->width()-20, 150);
+        frameResultado->setStyleSheet("background-color : #f5f5f5;");
         frameResultado->show();
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
+        shadowEffect->setBlurRadius(5);
+        shadowEffect->setColor(QColor(145, 145, 145, 80));
+        shadowEffect->setOffset(3, 3);
+        frameResultado->setGraphicsEffect(shadowEffect);
     }
     else {
         frameResultado->hide();
@@ -459,9 +496,14 @@ void ResultadosPCR::on_fechaPCRButton_clicked() {
 
         frameFechaPCR->setLayout(container);
 
-        frameFechaPCR->setGeometry(fechaPCRButton->x(), fechaPCRButton->y() + 50, 180, fechasPCR.size()*30);
-        frameFechaPCR->setStyleSheet("background-color : #e2e2e2;");
+        frameFechaPCR->setGeometry(fechaPCRButton->x()+20, fechaPCRButton->y() + 63, fechaPCRButton->width()-20, fechasPCR.size()*50);
+        frameFechaPCR->setStyleSheet("background-color : #f5f5f5;");
         frameFechaPCR->show();
+        QGraphicsDropShadowEffect* shadowEffect = new QGraphicsDropShadowEffect(this);
+        shadowEffect->setBlurRadius(5);
+        shadowEffect->setColor(QColor(145, 145, 145, 80));
+        shadowEffect->setOffset(3, 3);
+        frameFechaPCR->setGraphicsEffect(shadowEffect);
     }
     else {
         frameFechaPCR->hide();
@@ -480,6 +522,8 @@ void ResultadosPCR::opcionSegmentacionBloqueSeleccionada() {
     frameBloque = nullptr;
     // Actualizando label indicador de la segmentacion que se esta usando
     bloqueLabel->setText(*criterios[4]);
+    bloqueLabel->show();
+    limpiarBloque->show();
 }
 
 void ResultadosPCR::opcionSegmentacionCubiculoSeleccionada() {
@@ -492,54 +536,68 @@ void ResultadosPCR::opcionSegmentacionCubiculoSeleccionada() {
     frameCubiculo = nullptr;
     // Actualizando label indicador de la segmentacion que se esta usando
     cubiculoLabel->setText(*criterios[5]);
+    cubiculoLabel->show();
+    limpiarCubiculo->show();
 }
 
 void ResultadosPCR::opcionSegmentacionResultadoSeleccionada() {
     QPushButton* boton = (QPushButton*)sender();
-    criterios[17] = new QString(boton->text());
+    criterios[19] = new QString(boton->text());
     filtrar();
     // ocultando cuadro de seleccion de opcion de segmentacion
     frameResultado->hide();
     delete frameResultado;
     frameResultado = nullptr;
     // Actualizando label indicador de la segmentacion que se esta usando
-    resultadoLabel->setText(*criterios[17]);
+    resultadoLabel->setText(*criterios[19]);
+    resultadoLabel->show();
+    limpiarResultado->show();
 }
 
 void ResultadosPCR::opcionSegmentacionFechaPCRSeleccionada() {
     QPushButton* boton = (QPushButton*)sender();
-    criterios[14] = new QString(boton->text());
+    criterios[16] = new QString(boton->text());
     filtrar();
     // ocultando cuadro de seleccion de opcion de segmentacion
     frameFechaPCR->hide();
     delete frameFechaPCR;
     frameFechaPCR = nullptr;
     // Actualizando label indicador de la segmentacion que se esta usando
-    fechaPCRLabel->setText(*criterios[14]);
+    fechaPCRLabel->setText(*criterios[16]);
+    fechaPCRLabel->show();
+    limpiarFechaPCR->show();
 }
 
 void ResultadosPCR::limpiarSegmentacionBloque() {
     delete criterios[4], criterios[4] = nullptr;
     bloqueLabel->clear();
     filtrar();
+    limpiarBloque->hide();
+    bloqueLabel->hide();
 }
 
 void ResultadosPCR::limpiarSegmentacionCubiculo() {
     delete criterios[5], criterios[5] = nullptr;
     cubiculoLabel->clear();
     filtrar();
+    limpiarCubiculo->hide();
+    cubiculoLabel->hide();
 }
 
 void ResultadosPCR::limpiarSegmentacionResultado() {
-    delete criterios[17], criterios[17] = nullptr;
+    delete criterios[19], criterios[19] = nullptr;
     filtrar();
     resultadoLabel->clear();
+    limpiarResultado->hide();
+    resultadoLabel->hide();
 }
 
 void ResultadosPCR::limpiarSegmentacionFechaPCR() {
-    delete criterios[14], criterios[14] = nullptr;
+    delete criterios[16], criterios[16] = nullptr;
     filtrar();
     fechaPCRLabel->clear();
+    limpiarFechaPCR->hide();
+    fechaPCRLabel->hide();
 }
 
 void ResultadosPCR::actionAgregarListaRemision() {
@@ -560,6 +618,27 @@ void ResultadosPCR::filtroInteractivo(QString text) {
             index = i;
             break;
         }
+    }switch (index) {
+    case 4: {
+        limpiarSegmentacionBloque();
+        break;
+
+    }
+    case 5: {
+        limpiarSegmentacionCubiculo();
+        break;
+
+    }
+    case 19: {
+        limpiarSegmentacionResultado();
+        break;
+
+    }
+    case 23: {
+        limpiarSegmentacionFechaPCR();
+        break;
+
+    }
     }
     if(text != "")
         criterios[index] = new QString(text);
@@ -606,34 +685,107 @@ void ResultadosPCR::seccionSegmentacionDeDatos() {
     resultadoButton = new QPushButton("Resultado");
     fechaPCRButton = new QPushButton("Fecha PCR");
 
+    QString CSS = "QPushButton{"
+                  "     border-radius: 15px;"
+                  "     background-color: #ffffff;"
+                  "     height: 30px;"
+                  "}"
+                  "QPushButton:hover{"
+                  "     background-color: #f5f5f5;"
+                  "}";
+
+    bloqueButton->setStyleSheet(CSS);
+    cubiculoButton->setStyleSheet(CSS);
+    resultadoButton->setStyleSheet(CSS);
+    fechaPCRButton->setStyleSheet(CSS);
+
+    bloqueButton->setToolTip("Filtro de segmentacion de datos para la ubicacion por bloque del paciente.");
+    cubiculoButton->setToolTip("Filtro de segmentacion de datos para la ubicacion por cubiculo del paciente.");
+    resultadoButton->setToolTip("Filtro de segmentacion de datos para el resultado del ultimo PCR del paciente.");
+    fechaPCRButton->setToolTip("Filtro de segmentacion de datos para la fecha de toma de muestra del paciente.");
+
     limpiarBloque = new QPushButton("x");
     limpiarCubiculo = new QPushButton("x");
     limpiarResultado = new QPushButton("x");
     limpiarFechaPCR = new QPushButton("x");
+
+    QString limpiarCSS = "QPushButton{"
+                         "      width: 20px;"
+                         "      height: 20px;"
+                         "      border-radius: 11px;"
+                         "      background-color: none;"
+                         "      border: 1px solid black;"
+                         "      color: black;"
+                         "      padding-bottom: 3px;"
+                         "}"
+                         "QPushButton:hover{"
+                         "      color: rgb(152, 22, 40);"
+                         "      border: 1px solid #981628;"
+                         "}";
+
+    limpiarBloque->setStyleSheet(limpiarCSS);
+    limpiarCubiculo->setStyleSheet(limpiarCSS);
+    limpiarResultado->setStyleSheet(limpiarCSS);
+    limpiarFechaPCR->setStyleSheet(limpiarCSS);
+
+    limpiarBloque->setToolTip("Limpiar filtro.");
+    limpiarCubiculo->setToolTip("Limpiar filtro.");
+    limpiarResultado->setToolTip("Limpiar filtro.");
+    limpiarFechaPCR->setToolTip("Limpiar filtro.");
+
+    limpiarBloque->hide();
+    limpiarCubiculo->hide();
+    limpiarResultado->hide();
+    limpiarFechaPCR->hide();
 
     bloqueLabel = new QLabel("");
     cubiculoLabel = new QLabel("");
     resultadoLabel = new QLabel("");
     fechaPCRLabel = new QLabel("");
 
-    QVBoxLayout* bloquelayOut = new QVBoxLayout();
-    QVBoxLayout* cubiculolayOut = new QVBoxLayout();
-    QVBoxLayout* resultadolayOut = new QVBoxLayout();
-    QVBoxLayout* fechaPCRlayOut = new QVBoxLayout();
+    QString labelCSS = "QLabel{"
+                         "      font-size: 16pt;"
+                         "}";
 
-    QHBoxLayout* indicadorFiltroBloque = new QHBoxLayout();
-    QHBoxLayout* indicadorFiltroCubiculo = new QHBoxLayout();
-    QHBoxLayout* indicadorFiltroResultado = new QHBoxLayout();
-    QHBoxLayout* indicadorFiltroFechaPCR = new QHBoxLayout();
+    bloqueLabel->setStyleSheet(labelCSS);
+    cubiculoLabel->setStyleSheet(labelCSS);
+    resultadoLabel->setStyleSheet(labelCSS);
+    fechaPCRLabel->setStyleSheet(labelCSS);
 
+    bloqueLabel->hide();
+    cubiculoLabel->hide();
+    resultadoLabel->hide();
+    fechaPCRLabel->hide();
+
+    bloquelayOut = new QVBoxLayout();
+    cubiculolayOut = new QVBoxLayout();
+    resultadolayOut = new QVBoxLayout();
+    fechaPCRlayOut = new QVBoxLayout();
+
+    indicadorFiltroBloque = new QHBoxLayout();
+    indicadorFiltroCubiculo = new QHBoxLayout();
+    indicadorFiltroResultado = new QHBoxLayout();
+    indicadorFiltroFechaPCR = new QHBoxLayout();
+
+    indicadorFiltroBloque->addStretch(1);
     indicadorFiltroBloque->addWidget(bloqueLabel);
     indicadorFiltroBloque->addWidget(limpiarBloque);
+    indicadorFiltroBloque->addStretch(1);
+
+    indicadorFiltroCubiculo->addStretch(1);
     indicadorFiltroCubiculo->addWidget(cubiculoLabel);
     indicadorFiltroCubiculo->addWidget(limpiarCubiculo);
+    indicadorFiltroCubiculo->addStretch(1);
+
+    indicadorFiltroResultado->addStretch(1);
     indicadorFiltroResultado->addWidget(resultadoLabel);
     indicadorFiltroResultado->addWidget(limpiarResultado);
+    indicadorFiltroResultado->addStretch(1);
+
+    indicadorFiltroFechaPCR->addStretch(1);
     indicadorFiltroFechaPCR->addWidget(fechaPCRLabel);
     indicadorFiltroFechaPCR->addWidget(limpiarFechaPCR);
+    indicadorFiltroFechaPCR->addStretch(1);
 
     bloquelayOut->addWidget(bloqueButton);
     bloquelayOut->addLayout(indicadorFiltroBloque);

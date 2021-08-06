@@ -24,6 +24,10 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent) :
     ui(new Ui::VentanaPrincipal)
 {
     ui->setupUi(this);
+    // AGREGAR TABLA PERSONALIZADA
+    tabla = new CustomTable(this);
+    tabla->setStyleSheet(CSS);
+    ui->tableLayout->addWidget(tabla);
     // INICIALIZAR EL ACTUALIZADOR
     actualizador = new Actualizador(this, Actualizador::ActualizacionManual);
     // CONECTAR SENNALES QUE DISPARA EL ACTUALIZADOR CON RESPECTIVOS SLOTS
@@ -33,6 +37,14 @@ VentanaPrincipal::VentanaPrincipal(QWidget *parent) :
     // CARGAR TABLA PACIENTES DEL CENTRO
     on_actionPacientes_triggered();
     setWindowState(Qt::WindowMaximized);
+    setStyleSheet("#centralWidget {color: qlineargradient(spread:pad, x1:0 y1:0, x2:1 y2:1, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(255, 255, 255, 255));"
+                           "background: qlineargradient( x1:0 y1:0, x2:50 y2:50, stop:0 #76AADB, stop:1 #4A72B2);}"
+                  ""
+                  "QToolBar{"
+                  "     background-color: white;"
+                  "}");
+    // OCULTAR BARRA DE ESTADO, en futuras versiones podria implementarse algun comportamiento
+    ui->statusBar->setVisible(false);
 }
 
 VentanaPrincipal::~VentanaPrincipal() {
@@ -104,7 +116,7 @@ void VentanaPrincipal::on_actionPacientes_triggered() {
     setWindowTitle("Zona Roja Universidad de Oriente - Pacientes del centro");
     eliminarControladoresActivos();
     // Crear controlador para seccion Pacientes
-    controladorPacientes = new Pacientes(this, ui->tabla, DataBaseManager::DBPacientes);
+    controladorPacientes = new Pacientes(this, tabla, DataBaseManager::DBPacientes);
     controladorActivo = DataBaseManager::DBPacientes;
 }
 
@@ -118,7 +130,7 @@ void VentanaPrincipal::on_actionEgresos_triggered() {
     // CARGAR TABLA EGRESOS DEL CENTRO
     eliminarControladoresActivos();
     // Crear controlador para seccion Egresos
-    controladorPacientes = new Pacientes(this, ui->tabla, DataBaseManager::DBEgresos);
+    controladorPacientes = new Pacientes(this, tabla, DataBaseManager::DBEgresos);
     controladorActivo = DataBaseManager::DBEgresos;
 }
 
@@ -127,7 +139,7 @@ void VentanaPrincipal::on_actionRemisiones_triggered() {
     // CARGAR TABLA REMISIONES DEL CENTRO
     eliminarControladoresActivos();
     // Crear controlador para seccion Remisiones
-    controladorPacientes = new Pacientes(this, ui->tabla, DataBaseManager::DBRemisiones);
+    controladorPacientes = new Pacientes(this, tabla, DataBaseManager::DBRemisiones);
     controladorActivo = DataBaseManager::DBRemisiones;
 }
 
@@ -147,7 +159,7 @@ void VentanaPrincipal::on_actionResultados_PCR_triggered() {
     // CARGAR TABLA RESULTADOS PCR DEL CENTRO
     eliminarControladoresActivos();
     // Crear controlador para seccion Remisiones
-    controladorResultadosPCR = new ResultadosPCR(this, ui->tabla, DataBaseManager::DBResultadosPCR);
+    controladorResultadosPCR = new ResultadosPCR(this, tabla, DataBaseManager::DBResultadosPCR);
     controladorActivo = DataBaseManager::DBResultadosPCR;
 }
 

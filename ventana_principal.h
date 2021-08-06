@@ -10,6 +10,8 @@
 #include <QDragEnterEvent>
 #include <QMimeData>
 
+#include <customtable.h>
+
 #include "pacientes.h"
 #include "resultadospcr.h"
 #include "actualizador.h"
@@ -91,7 +93,38 @@ private:
     Pacientes* controladorPacientes = nullptr;
     ResultadosPCR* controladorResultadosPCR = nullptr;
     QMessageBox* blockingMsg;
-
+    CustomTable* tabla;
+    QString CSS = "QTableWidget{"
+                  "     font-size: 12pt;"
+                  "     selection-color: black;" // color del texto del item que se selecciona
+                  "     border: 1px solid white;"
+                  "     color: #2b2f33;"
+                  "     border-radius: 5px;"
+                  "}"
+                  "QHeaderView{"
+                  "     border: 1px solid gray;"
+                  "     border-style: none none solid none;"
+                  "     color: #495057;"
+                  "     background-color: white;"
+                  "}"
+                  "QHeaderView::section:checked{"
+                  "     background-color: white;"
+                  "     border: 1px solid gray;"
+                  "     border-style: none none none none;"
+                  "     padding: 4px;"
+                  "}"
+                  "QHeaderView::section:hover{"
+                  "     background-color: #eaeaea;"
+                  "     border: 1px solid gray;"
+                  "     border-style: none none none none;"
+                  "     padding: 4px;"
+                  "}"
+                  "QTableWidget::item:selected{"
+                  "     background-color: #999999;"
+                  "}"
+                  "QTableView{"
+                  "     background-color: white;"
+                  "}";
 };
 
 #endif // VENTANA_PRINCIPAL_H

@@ -40,17 +40,19 @@
 #include <QModelIndexList>
 #include <QItemSelectionModel>
 
+#include <QFontDatabase>
+#include <QGraphicsDropShadowEffect>
+
+
 
 #include <databasemanager.h>
 
 typedef QList<QStringList> Tabla;
 
-
-#define ROJO "#a01127"
-#define VERDE "#4f8e3a"
-#define AZUL "#4a72b2"
-#define GRIS "#87868a"
-#define BLANCO "#ffffff"
+#define ROJO QColor(152, 22, 40, 80)
+#define VERDE QColor(37, 132, 64, 100)
+#define AZUL QColor(22, 69, 132, 50)
+#define GRIS QColor(145, 145, 145, 80)
 
 
 /**
@@ -105,7 +107,7 @@ private slots:
 
     // slots para manejar comportamiento de botones de seleccion de segmentacion de datos
     void opcionSegmentacionBloqueSeleccionada();
-
+    // filtra los pacientes que estan en determinado cubiculo
     void opcionSegmentacionCubiculoSeleccionada();
     // filtra todos los pacientes que tienen un resultado actual, se determina por el color de la fila
     void opcionSegmentacionResultadoSeleccionada();
@@ -147,6 +149,8 @@ private:
     QString **criterios; // criterios para filtrar, puede ser un array de 24 o 25 elementos
     QString *textoSegmentacionResultado = nullptr;
     QString *textoSegmentacionFechaPCR = nullptr;
+    QVBoxLayout *bloquelayOut, *cubiculolayOut, *resultadolayOut, *fechaPCRlayOut;
+    QHBoxLayout *indicadorFiltroBloque, *indicadorFiltroCubiculo, *indicadorFiltroResultado, *indicadorFiltroFechaPCR;
     QMenu* menu;
     int filtroActivo = 0;
     int scrollBarValue = 0;

@@ -40,17 +40,18 @@
 #include <QItemSelectionModel>
 #include <QPair>
 
+#include <QGraphicsDropShadowEffect>
+
 
 #include <databasemanager.h>
 
 typedef QList<QStringList> Tabla;
 
 
-#define ROJO "#a01127"
-#define VERDE "#4f8e3a"
-#define AZUL "#4a72b2"
-#define GRIS "#87868a"
-#define BLANCO "#ffffff"
+#define ROJO QColor(152, 22, 40, 80)
+#define VERDE QColor(37, 132, 64, 100)
+#define AZUL QColor(22, 69, 132, 50)
+#define GRIS QColor(145, 145, 145, 80)
 
 /**
  * @brief Clase ResultadosPCR
@@ -133,6 +134,8 @@ private:
     QPushButton *bloqueButton, *cubiculoButton, *resultadoButton, *fechaPCRButton;
     QLabel *bloqueLabel, *cubiculoLabel, *resultadoLabel, *fechaPCRLabel;
     QPushButton* limpiarBloque, *limpiarCubiculo, *limpiarResultado, *limpiarFechaPCR;
+    QVBoxLayout *bloquelayOut, *cubiculolayOut, *resultadolayOut, *fechaPCRlayOut;
+    QHBoxLayout *indicadorFiltroBloque, *indicadorFiltroCubiculo, *indicadorFiltroResultado, *indicadorFiltroFechaPCR;
     // indicadores
     QString **criterios; // criterios para filtrar, puede ser un array de 24 o 25 elementos
     QMenu* menu;

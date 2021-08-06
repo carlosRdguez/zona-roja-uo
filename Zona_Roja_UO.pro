@@ -35,7 +35,8 @@ SOURCES += \
     databasemanager.cpp \
     resultadospcr.cpp \
     actualizador.cpp \
-    excelmanager.cpp
+    excelmanager.cpp \
+    customtable.cpp
 
 HEADERS += \
         ventana_principal.h \
@@ -43,9 +44,13 @@ HEADERS += \
     databasemanager.h \
     resultadospcr.h \
     actualizador.h \
-    excelmanager.h
+    excelmanager.h \
+    customtable.h
 
 FORMS += \
         ventana_principal.ui
 
-RC_ICONS += zonaroja.ico
+RC_ICONS += 'icon.ico'
+
+RESOURCES += \
+    resources.qrc
